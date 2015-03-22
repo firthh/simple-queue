@@ -4,10 +4,11 @@
             [langohr.queue     :as lq]
             [langohr.consumers :as lc]
             [langohr.basic     :as lb]
-            [langohr.exchange  :as le]))
+            [langohr.exchange  :as le]
+            [com.stuartsierra.component :as component]))
 
 
-(defrecord Queue [host bus exchange-name connection-info qname]
+(defrecord Queue [exchange-name connection-info qname]
   component/Lifecycle
   (start [component]
     (println "Connection to Rabbit MQ message bus")
@@ -33,10 +34,10 @@
      (assoc :qname nil))))
 
 (defn create-queue
-  ([host bus exchange-name]
-   (.start (map->Queue {:host host :bus bus :exchange-name exchange-name})))
-  ([host bus exchange-name connection-info]
-   (.start (map->Queue {:host host :bus bus :exchange-name exchange-name :connection-info connection-info}))))
+  ([exchange-name]
+   (.start (map->Queue {:exchange-name exchange-name})))
+  ([exchange-name connection-info]
+   (.start (map->Queue {:exchange-name exchange-name :connection-info connection-info}))))
 
 (defn publish [component message]
   (lb/publish (:channel component) (:exchange component) (:qname component) message {:content-type "text/plain"}))

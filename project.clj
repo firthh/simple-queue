@@ -1,4 +1,4 @@
-(defproject org.clojars.firthh/simple-queue "0.1.0-SNAPSHOT"
+(defproject org.clojars.firthh/simple-queue "0.1.1-SNAPSHOT"
   :description "Simple wrapper around Langohr"
   :url "https://github.com/firthh/"
   :license {:name "Eclipse Public License"
