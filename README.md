@@ -1,10 +1,8 @@
 # simple-queue
 
-A Clojure library designed to ... well, that part is up to you.
+A simple wrapper around Langohr - https://github.com/michaelklishin/langohr
 
-## Usage
-
-FIXME
+I wrote it to simplify some microservices, I wouldn't recomend using it
 
 ## License
 
