@@ -42,8 +42,11 @@
 (defn publish [component message]
   (lb/publish (:channel component) (:exchange component) (:qname component) message {:content-type "text/plain"}))
 
-(defn subscribe [component message-handler]
+(defn subscribe-blocking [component message-handler]
   (lc/blocking-subscribe (:channel component) (:qname component) message-handler {:auto-ack true}))
+
+(defn subscribe [component message-handler]
+  (lc/subscribe (:channel component) (:qname component) message-handler {:auto-ack true}))
 
 (defmacro defhandler [name & body]
   `(defn ~name
