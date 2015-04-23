@@ -49,7 +49,8 @@
   (lc/subscribe (:channel component) (:qname component) message-handler {:auto-ack true}))
 
 (defmacro defhandler [name & body]
-  `(defn ~name
-     [~'ch {:keys [content-type# delivery-tag#] :as ~'meta} ^"bytes" payload#]
-     (let  [~'data (String. payload# "UTF-8")]
-       ~@body)))
+  `(defn ~name [~'component]
+     (fn
+       [~'ch {:keys [content-type# delivery-tag#] :as ~'meta} ^"bytes" payload#]
+       (let  [~'data (String. payload# "UTF-8")]
+         ~@body))))
